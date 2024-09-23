@@ -4,7 +4,10 @@ export function Todolist() {
   const [todoDescription, setTodoDescription] = useState('');
   const [items, setItems] = useState([]);
   const [error, setError] = useState('');
-  const [editItemId, setEditItemId] = useState(null); // Changed this to hold the ID of the item being edited
+  const [editItemId, setEditItemId] = useState(null);
+  const storedTodo = localStorage.getItem('toDo')
+
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -14,7 +17,6 @@ export function Todolist() {
     }
 
     if (editItemId !== null) {
-      // Edit functionality
       setItems((prevItems) =>
         prevItems.map((item) =>
           item.id === editItemId
@@ -23,19 +25,29 @@ export function Todolist() {
         )
       );
       setEditItemId(null);
-    } else {
-      // Add new item
+    }
+    else {
       const newItem = {
         id: items.length + 1,
         description: todoDescription,
         done: false,
       };
       setItems((prev) => [...prev, newItem]);
+      const toDo = document.querySelector(".newItem").value;
+      toDo.textContent = newItem;
+      localStorage.setItem('toDo', JSON.stringify(newItem))
     }
 
     setTodoDescription('');
     setError('');
   };
+
+  if (storedTodo) {
+    const todoData = JSON.parse(storedTodo)
+  }
+  else {
+    alert('No To Do saved on storage.')
+  }
 
   const setAchieved = (id) => {
     setItems((prev) =>
@@ -48,14 +60,34 @@ export function Todolist() {
   const todoEdit = (id) => {
     const editTodo = items.find((i) => i.id === id);
     if (editTodo) {
-      setTodoDescription(editTodo.description); // Set the description in the input for editing
-      setEditItemId(id); // Set the ID of the item being edited
+      setTodoDescription(editTodo.description);
+      setEditItemId(id);
     }
   };
 
   const todoDelete = (id) => {
     setItems((prev) => prev.filter((item) => item.id !== id));
+    localStorage.removeItem('toDo')
   };
+
+  const displayTodo = () => {
+    const storedTodo = localStorage.getItem('toDo')
+
+    if (storedTodo) {
+      toDo.textContent = storedTodo
+    } else {
+      toDo.textContent = 'No To Do saved on storage.'
+    }
+  }
+  
+
+  const deleteAll = () => {
+    localStorage.clear()
+  }
+
+  const confirmDel = () => {
+    localStorage.clear()  // Borrar todo el almacenamiento.
+  }
 
   return (
     <main>
@@ -74,7 +106,7 @@ export function Todolist() {
       <ul>
         {items.map((toDo) => (
           <li key={toDo.id}>
-            id: {toDo.id} - {toDo.description}
+            id: {toDo.id} - {toDo.description} {displayTodo}
             <input
               type="checkbox"
               onChange={() => setAchieved(toDo.id)}
