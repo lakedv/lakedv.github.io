@@ -1,17 +1,25 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export function Todolist() {
-  const [todoDescription, setTodoDescription] = useState('');
-  const [items, setItems] = useState([]);
+  const [todoList, setTodo] = useState('');
+  const [items, setItems] = useState(() => {
+    const t = localStorage.getItem('items'); 
+    return t ? JSON.parse(t) : [] 
+  });
   const [error, setError] = useState('');
   const [editItemId, setEditItemId] = useState(null);
-  const storedTodo = localStorage.getItem('toDo')
-
-
+  const [nextId, setNextId] = useState(() => {
+    const nextId = localStorage.getItem('nextId');
+    return nextId ? parseInt(nextId) : 1;  
+  })
+  useEffect(() => {
+    localStorage.setItem('nextId', nextId.toString());
+    localStorage.setItem('items', JSON.stringify(items))
+  })
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (todoDescription.trim() === '') {
+    if (todoList.trim() === '') {
       setError('Input field cannot be empty.');
       return;
     }
@@ -20,7 +28,7 @@ export function Todolist() {
       setItems((prevItems) =>
         prevItems.map((item) =>
           item.id === editItemId
-            ? { ...item, description: todoDescription }
+            ? { ...item, description: todoList }
             : item
         )
       );
@@ -28,26 +36,17 @@ export function Todolist() {
     }
     else {
       const newItem = {
-        id: items.length + 1,
-        description: todoDescription,
+        id: nextId,
+        description: todoList,
         done: false,
       };
       setItems((prev) => [...prev, newItem]);
-      const toDo = document.querySelector(".newItem").value;
-      toDo.textContent = newItem;
-      localStorage.setItem('toDo', JSON.stringify(newItem))
+      setNextId(parseInt(nextId) + 1)
     }
-
-    setTodoDescription('');
+    console.log(nextId)
+    setTodo('');
     setError('');
   };
-
-  if (storedTodo) {
-    const todoData = JSON.parse(storedTodo)
-  }
-  else {
-    alert('No To Do saved on storage.')
-  }
 
   const setAchieved = (id) => {
     setItems((prev) =>
@@ -60,33 +59,19 @@ export function Todolist() {
   const todoEdit = (id) => {
     const editTodo = items.find((i) => i.id === id);
     if (editTodo) {
-      setTodoDescription(editTodo.description);
+      setTodo(editTodo.description);
       setEditItemId(id);
     }
   };
 
   const todoDelete = (id) => {
     setItems((prev) => prev.filter((item) => item.id !== id));
-    localStorage.removeItem('toDo')
   };
-
-  const displayTodo = () => {
-    const storedTodo = localStorage.getItem('toDo')
-
-    if (storedTodo) {
-      toDo.textContent = storedTodo
-    } else {
-      toDo.textContent = 'No To Do saved on storage.'
-    }
-  }
-  
 
   const deleteAll = () => {
     localStorage.clear()
-  }
-
-  const confirmDel = () => {
-    localStorage.clear()  // Borrar todo el almacenamiento.
+    setItems([]);
+    setNextId(1);
   }
 
   return (
@@ -96,8 +81,8 @@ export function Todolist() {
           To Do:
           <input
             type="text"
-            value={todoDescription}
-            onChange={(e) => setTodoDescription(e.target.value)}
+            value={todoList}
+            onChange={(e) => setTodo(e.target.value)}
           />
         </label>
         <button type="submit">{editItemId !== null ? 'Update' : 'Add'}</button>
@@ -106,7 +91,7 @@ export function Todolist() {
       <ul>
         {items.map((toDo) => (
           <li key={toDo.id}>
-            id: {toDo.id} - {toDo.description} {displayTodo}
+            id: {toDo.id} - {toDo.description}
             <input
               type="checkbox"
               onChange={() => setAchieved(toDo.id)}
@@ -117,6 +102,7 @@ export function Todolist() {
           </li>
         ))}
       </ul>
+      <button onClick={deleteAll}>Delete All</button>
     </main>
   );
 }
