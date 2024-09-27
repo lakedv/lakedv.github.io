@@ -1,16 +1,16 @@
 import { useState, useEffect } from 'react';
 
-export function Todolist() {
+export default function Todolist() {
   const [todoList, setTodo] = useState('');
   const [items, setItems] = useState(() => {
-    const t = localStorage.getItem('items'); 
-    return t ? JSON.parse(t) : [] 
+    const t = localStorage.getItem('items');
+    return t ? JSON.parse(t) : []
   });
   const [error, setError] = useState('');
   const [editItemId, setEditItemId] = useState(null);
   const [nextId, setNextId] = useState(() => {
     const nextId = localStorage.getItem('nextId');
-    return nextId ? parseInt(nextId) : 1;  
+    return nextId ? parseInt(nextId) : 1;
   })
   useEffect(() => {
     localStorage.setItem('nextId', nextId.toString());
@@ -91,12 +91,14 @@ export function Todolist() {
       <ul>
         {items.map((toDo) => (
           <li key={toDo.id}>
-            id: {toDo.id} - {toDo.description}
             <input
               type="checkbox"
               onChange={() => setAchieved(toDo.id)}
               checked={toDo.done}
             />
+            <span style={{ marginLeft: "10px" }}>
+              {toDo.done ? <del>{toDo.description}</del> : toDo.description}
+            </span>
             <button onClick={() => todoEdit(toDo.id)}>Edit</button>
             <button onClick={() => todoDelete(toDo.id)}>Delete</button>
           </li>
