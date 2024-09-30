@@ -1,23 +1,28 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
+import { faHouseUser } from '@fortawesome/free-solid-svg-icons';
+import { faFolderOpen } from '@fortawesome/free-solid-svg-icons';
+import { faAddressCard } from '@fortawesome/free-solid-svg-icons';
 
 export default function NavBar() {
 	return (
-		<nav>
-			<div className='navBar'>
-				<div className='homePage'>
-					<Link to="/">Home</Link>
-				</div>
-				<div className='Projects'>
-					<Link to="/Projects">Projects</Link>
-				</div>
-				<div className='aboutMe'>
-					<Link to="/About">About me</Link>
-				</div>
-				<div className='contactMe'>
-					<Link to="/Contact">Contact me</Link>
-				</div>
-			</div>
+		<nav className='two columns navbar'>
+			<ul>
+				<li>
+				<Link class='active' to="/"><FontAwesomeIcon icon={faHouseUser} size="5x" /></Link>
+				</li>
+				<li>
+					<Link to="/Projects"><FontAwesomeIcon icon={faFolderOpen} size="5x" /></Link>
+				</li>
+				<li>
+					<Link to="/About"><FontAwesomeIcon icon={faAddressCard} size="5x" /></Link>
+				</li>
+				<li>
+				<Link to="/Contact"><FontAwesomeIcon icon={faEnvelope} size="5x" /></Link>
+				</li>
+			</ul>
 		</nav>
 	);
 };

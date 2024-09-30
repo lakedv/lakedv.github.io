@@ -1,0 +1,24 @@
+/* added by Owner
+----------------------------------------------*/
+/*::root {
+  --color navBar: 0d407f
+  --color background body: 171d25
+  --color hover: 14345c
+  --color active: 3f71b3
+}*/
+.app {
+  background-color: #171d25;
+}
+
+.navbar {
+  padding-top: 10vh;
+  padding-bottom: 10vh;
+  background-color: #0d407f;
+}
+
+.navbar li {
+  height: 20vh;
+  margin-top: 20px;
+  margin-left: 25px;
+  transition: width 0.5s ease-out;
+}

@@ -1,8 +1,12 @@
 export default function Contact() {
 
     return (
-        <div className='contactContainer'>
-            <p>Work in progress</p>
+        <span>
+        <div>
+            <h1>Work in progress</h1>
+                <p>Form where i can receive mails from.</p>
         </div>
+        <footer>Copyright® German Mirarchi</footer>
+        </span>
     )
 }

@@ -8,7 +8,7 @@ import Todolist from '../projects/todolist/TodoList'
 
 export default function AppRouter() {
     return (
-        <div className="navContainer">
+        <div className='nine columns'>
             <Routes>
                 <Route path="/"         element={<Home />} />
                 <Route path="/Projects" element={<Projects />} />

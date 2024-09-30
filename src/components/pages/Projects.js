@@ -3,13 +3,14 @@ import { Link } from 'react-router-dom';
 export default function Projects() {
 
     return (
-        <>
-            <h1>Projects</h1>
-            <div className="projectContainer">
+            <span>
+            <div>
+                <h1>Projects</h1>
                 <div>
                     <Link to='/Todolist'>To do List</Link>
                 </div>
             </div>
-        </>
+            <footer>Copyright® German Mirarchi</footer>
+            </span>
     )
 }

@@ -1,6 +1,18 @@
 import { useState, useEffect } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faXmark } from '@fortawesome/free-solid-svg-icons';
+import { faPen } from '@fortawesome/free-solid-svg-icons';
+import Swal from 'sweetalert2';
 
 export default function Todolist() {
+
+  const swalAlert = Swal.mixin({
+    customClass: {
+      confirmButton: "btn btn-success",
+      cancelButton: "btn btn-danger"
+    },
+    buttonsStyling: false
+  })
   const [todoList, setTodo] = useState('');
   const [items, setItems] = useState(() => {
     const t = localStorage.getItem('items');
@@ -35,12 +47,12 @@ export default function Todolist() {
       setEditItemId(null);
     }
     else {
-      const newItem = {
+      const toDo = {
         id: nextId,
         description: todoList,
         done: false,
       };
-      setItems((prev) => [...prev, newItem]);
+      setItems((prev) => [...prev, toDo]);
       setNextId(parseInt(nextId) + 1)
     }
     console.log(nextId)
@@ -58,10 +70,14 @@ export default function Todolist() {
 
   const todoEdit = (id) => {
     const editTodo = items.find((i) => i.id === id);
-    if (editTodo) {
+    if (editTodo.done) {
+        setError('You can only edit uncompleted Items.')
+        return;
+    } else  {
       setTodo(editTodo.description);
       setEditItemId(id);
     }
+    setError('')
   };
 
   const todoDelete = (id) => {
@@ -69,26 +85,49 @@ export default function Todolist() {
   };
 
   const deleteAll = () => {
-    localStorage.clear()
-    setItems([]);
-    setNextId(1);
+    swalAlert.fire({
+      title: "Are you sure?",
+      text: "You will delete all the cache.",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Proceed",
+      cancelButtonText: "Cancel",
+      reverseButtons: true
+    }).then((result)=> {
+      if(result.isConfirmed){
+        localStorage.clear()
+        setItems([]);
+        setNextId(1);
+        swalAlert.fire({
+          title: "Cache deleted.",
+          icon: "success"
+        });
+      } else {
+        swalAlert.fire({
+          title: "Operation aborted."
+        })
+      }
+    })
   }
+
+
 
   return (
     <main>
       <form onSubmit={handleSubmit}>
-        <label>
-          To Do:
+        <label >
+          To Do:<br/>
           <input
+            className='todo-input'
             type="text"
             value={todoList}
             onChange={(e) => setTodo(e.target.value)}
           />
-        </label>
-        <button type="submit">{editItemId !== null ? 'Update' : 'Add'}</button>
+        <button className='todo-add-button' type="submit">{editItemId !== null ? 'Update' : 'Add'}</button>
         {error && <p style={{ color: 'red' }}>{error}</p>}
+        </label>
       </form>
-      <ul>
+      <ul className='todo-list'>
         {items.map((toDo) => (
           <li key={toDo.id}>
             <input
@@ -97,14 +136,22 @@ export default function Todolist() {
               checked={toDo.done}
             />
             <span style={{ marginLeft: "10px" }}>
-              {toDo.done ? <del>{toDo.description}</del> : toDo.description}
+              {toDo.done ? <del className='todo-done'>{toDo.description}</del> : toDo.description}
             </span>
-            <button onClick={() => todoEdit(toDo.id)}>Edit</button>
-            <button onClick={() => todoDelete(toDo.id)}>Delete</button>
+            <button className='todo-edit-button' onClick={() => todoEdit(toDo.id)}><FontAwesomeIcon icon={faPen} /></button>
+            <button className='todo-del-button' onClick={() => todoDelete(toDo.id)}><FontAwesomeIcon icon={faXmark} /></button>
           </li>
         ))}
       </ul>
-      <button onClick={deleteAll}>Delete All</button>
+      <button className='todo-delall-button' onClick={deleteAll}>Delete All</button>
     </main>
   );
 }
+
+
+
+
+
+
+
+
