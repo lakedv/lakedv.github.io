@@ -1,15 +1,30 @@
 /* added by Owner
 ----------------------------------------------*/
-/*::root {
-  --color navBar: 0d407f
-  --color background body: 171d25
-  --color hover: 14345c
-  --color active: 3f71b3
-}*/
-.app {
-  background-color: #171d25;
+:root {
+  --primary:   #33C3F0;
+  --secondary: #6C757D;
+  --warning:   #FFC107;
+  --danger:    #DC3545;
+  --success:   #28A745;
 }
 
+.body {
+  background-color: #161920;
+}
+
+.todo-done {
+  color: #6C757D ;
+}
+.todo-container {
+  padding: 35px;
+  min-height: 300px;
+  border-radius: 5px;
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.8);
+  line-break: normal;
+}
+.todoImg{
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
 .navbar {
   padding-top: 10vh;
   padding-bottom: 10vh;
@@ -19,6 +34,62 @@
 .navbar li {
   height: 20vh;
   margin-top: 20px;
-  margin-left: 25px;
   transition: width 0.5s ease-out;
+  text-align: center;
+}
+.todo-list {
+  list-style: none;
+}
+.footer {
+  text-align: center;
+}
+.button-primary {
+  margin-left: 10px;
+  margin-right: 5px;
+}
+
+.button-secondary, 
+button.button-secondary,
+input[type="submit"].button-secondary, 
+input[type="reset"].button-secondary,
+input[type="button"].button-secondary {
+  background-color: var(--secondary);
+  border-color: var(--secondary);
+  color: #FFF;
+}
+
+.button-warning,
+button.button-warning,
+input[type="submit"].button-secondary,
+input[type="reset"].button-secondary,
+input[type="button"].button-secondary {
+  background-color: var(--warning);
+  border-color: var(--warning);
+  margin-right: 10px;
+}
+
+.button-success,
+button.button-success,
+input[type="submit"].button-success,
+input[type="reset"].button-success,
+input[type="button"].button-success {
+  background-color: var(--success);
+  border-color: var(--success);
+  color: #FFF
+}
+
+.button-danger, 
+button.button-danger,
+input[type="submit"].button-danger,
+input[type="reset"].button-danger,
+input[type="button"].button-danger {
+ background-color: var(--danger);
+ border-color: var(--danger);
+ margin-left: 10px;
+ color: #FFF
+}
+
+.title-h1 {
+  text-align: center;
+  text-decoration: underline;
 }

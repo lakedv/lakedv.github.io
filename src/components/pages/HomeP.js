@@ -2,12 +2,12 @@ export default function Home() {
     return (
         <span>
             <div>
-                <h1>This is the home page</h1>
+                <h1 className='title-h1'>German Mirarchi Portfolio</h1>
+                <div>
                 <p>
-                    here Im gonna explian about the portfolio and a bit about myself.
                 </p>
+                </div>
             </div>
-            <footer>Copyright® German Mirarchi</footer>
         </span>
     )
 }

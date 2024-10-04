@@ -8,11 +8,12 @@ export default function Todolist() {
 
   const swalAlert = Swal.mixin({
     customClass: {
-      confirmButton: "btn btn-success",
-      cancelButton: "btn btn-danger"
+      confirmButton: "btn button-success",
+      cancelButton: "btn button-danger"
     },
     buttonsStyling: false
   })
+  const maxLength = 50;
   const [todoList, setTodo] = useState('');
   const [items, setItems] = useState(() => {
     const t = localStorage.getItem('items');
@@ -71,9 +72,9 @@ export default function Todolist() {
   const todoEdit = (id) => {
     const editTodo = items.find((i) => i.id === id);
     if (editTodo.done) {
-        setError('You can only edit uncompleted Items.')
-        return;
-    } else  {
+      setError('You can only edit uncompleted Items.')
+      return;
+    } else {
       setTodo(editTodo.description);
       setEditItemId(id);
     }
@@ -93,8 +94,8 @@ export default function Todolist() {
       confirmButtonText: "Proceed",
       cancelButtonText: "Cancel",
       reverseButtons: true
-    }).then((result)=> {
-      if(result.isConfirmed){
+    }).then((result) => {
+      if (result.isConfirmed) {
         localStorage.clear()
         setItems([]);
         setNextId(1);
@@ -116,42 +117,51 @@ export default function Todolist() {
     <main>
       <form onSubmit={handleSubmit}>
         <label >
-          To Do:<br/>
+          To Do:<br />
           <input
             className='todo-input'
             type="text"
             value={todoList}
+            maxLength={maxLength}
             onChange={(e) => setTodo(e.target.value)}
           />
-        <button className='todo-add-button' type="submit">{editItemId !== null ? 'Update' : 'Add'}</button>
-        {error && <p style={{ color: 'red' }}>{error}</p>}
+          <button className='button-primary' type="submit">{editItemId !== null ? 'Update' : 'Add'}</button>
+          {error && <p style={{ color: 'red' }}>{error}</p>}
         </label>
+         {todoList.length}/{maxLength}
       </form>
-      <ul className='todo-list'>
-        {items.map((toDo) => (
-          <li key={toDo.id}>
-            <input
-              type="checkbox"
-              onChange={() => setAchieved(toDo.id)}
-              checked={toDo.done}
-            />
-            <span style={{ marginLeft: "10px" }}>
-              {toDo.done ? <del className='todo-done'>{toDo.description}</del> : toDo.description}
-            </span>
-            <button className='todo-edit-button' onClick={() => todoEdit(toDo.id)}><FontAwesomeIcon icon={faPen} /></button>
-            <button className='todo-del-button' onClick={() => todoDelete(toDo.id)}><FontAwesomeIcon icon={faXmark} /></button>
-          </li>
-        ))}
-      </ul>
-      <button className='todo-delall-button' onClick={deleteAll}>Delete All</button>
+      <button className='button-danger' onClick={deleteAll}>Delete All</button>
+
+      <div className='container'>
+        <div className='row'>
+          <div className='offset-by-three six columns todo-container'>
+            <ul className="todo-list">
+              {items.map((toDo) => (
+                <li className="row" key={toDo.id}>
+                  <div className='one columns'>
+                    <input
+                      type="checkbox"
+                      onChange={() => setAchieved(toDo.id)}
+                      checked={toDo.done}
+                    />
+                  </div>
+
+                  <div className="seven columns">
+                    {toDo.done ? <del className='todo-done'>{toDo.description}</del> : toDo.description}
+                  </div>
+
+                  <div className="two columns">
+                    <button className='button-warning' onClick={() => todoEdit(toDo.id)}><FontAwesomeIcon icon={faPen} /></button>
+                  </div>
+                  <div className="two columns">
+                    <button className='button-danger' onClick={() => todoDelete(toDo.id)}><FontAwesomeIcon icon={faXmark} /></button>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
     </main>
   );
 }
-
-
-
-
-
-
-
-
