@@ -1,0 +1,125 @@
+/* text related
+----------------------------------------------*/
+:root {
+  --primary:   #33C3F0;
+  --secondary: #6C757D;
+  --warning:   #FFC107;
+  --danger:    #DC3545;
+  --success:   #28A745;
+}
+
+.todo-done {
+  color: #6C757D ;
+}
+.todo-container {
+  padding: 35px;
+  min-height: 300px;
+  border-radius: 5px;
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.8);
+  line-break: normal;
+}
+.todoImg{
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+.todo-list {
+  list-style: none;
+}
+.footer {
+  text-align: center;
+}
+
+.home-text {
+  text-align: center;
+}
+
+.title-h1 {
+  text-align: center;
+  text-decoration: underline;
+}
+
+/*
+--------------------Navigation Bar---------------------
+*/
+.navbar {
+  padding-top: 10vh;
+  padding-bottom: 10vh;
+  background-color: #0d407f;
+}
+
+.navbar li {
+  height: 20vh;
+  margin-top: 20px;
+  transition: width 0.5s ease-out;
+  text-align: center;
+}
+
+.navbar li:hover {
+  background-color: #0d407f;
+  position: relative;
+  z-index: 99;
+}
+
+.navbar .link-text {
+  opacity: 0;
+  font-size: 16pt;
+  margin-left: -50px;
+  transition: margin-left 0.5s ease-out, opacity 0.5s ease-out;
+}
+
+.navbar li:hover .link-text {
+  opacity: 1;
+  margin-left: 30px;
+  display: inline-block;
+}
+
+/*
+------------------------------Buttons--------------------------
+*/
+
+.button-primary {
+  margin-left: 10px;
+  margin-right: 5px;
+}
+
+.button-secondary, 
+button.button-secondary,
+input[type="submit"].button-secondary, 
+input[type="reset"].button-secondary,
+input[type="button"].button-secondary {
+  background-color: var(--secondary);
+  border-color: var(--secondary);
+  color: #FFF;
+}
+
+.button-warning,
+button.button-warning,
+input[type="submit"].button-secondary,
+input[type="reset"].button-secondary,
+input[type="button"].button-secondary {
+  background-color: var(--warning);
+  border-color: var(--warning);
+  margin-right: 10px;
+}
+
+.button-success,
+button.button-success,
+input[type="submit"].button-success,
+input[type="reset"].button-success,
+input[type="button"].button-success {
+  background-color: var(--success);
+  border-color: var(--success);
+  color: #FFF
+}
+
+.button-danger, 
+button.button-danger,
+input[type="submit"].button-danger,
+input[type="reset"].button-danger,
+input[type="button"].button-danger {
+ background-color: var(--danger);
+ border-color: var(--danger);
+ margin-left: 10px;
+ color: #FFF
+}
+
