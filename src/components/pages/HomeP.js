@@ -12,6 +12,7 @@ export default function Home() {
                 <p className='home-text'>
                     Bienvenidos a mi Portfolio, el cual fue realizado con las herramientas React.JS<FontAwesomeIcon icon={faReact} />, HTML5 <FontAwesomeIcon icon={faHtml5} /> y CSS<FontAwesomeIcon icon={faCss3} />.<br/>
                     Aqui estare subiendo mis ultimos proyectos, mi curriculum vitae, mis ultimas experiencias laborales y un formulario de contacto para ofertas de trabajo.<br/>
+                    El codigo fuente del sitio se puede encontrar en <a href='https://github.com/lakedv/lakedv.github.io'> este link</a>
                 </p>
                 </div>
             </div>
