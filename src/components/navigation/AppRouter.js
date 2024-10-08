@@ -1,4 +1,5 @@
 import { Route, Routes } from 'react-router-dom'
+import Footer from '../shared/Footer'
 import Home from '../pages/HomeP'
 import Projects from '../pages/Projects'
 import Contact from '../pages/Contact'
@@ -8,7 +9,7 @@ import Todolist from '../projects/todolist/TodoList'
 
 export default function AppRouter() {
     return (
-        <div className='ten columns'>
+        <main className='ten columns'>
             <Routes>
                 <Route path="/"         element={<Home />} />
                 <Route path="/Projects" element={<Projects />} />
@@ -16,6 +17,7 @@ export default function AppRouter() {
                 <Route path="/Contact"  element={<Contact />} />
                 <Route path="/Todolist" element={<Todolist />} />
             </Routes>
-        </div>
+            <Footer />
+        </main>
     )
 }
