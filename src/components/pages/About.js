@@ -4,16 +4,15 @@ import CV from '../../resources/docs/MGermanCVESP.pdf'
 
 export default function About() {
     return (
-        <>
+        <div className="container">
         <h1 className='title-h1'>Sobre Mi</h1>
-            <div className='row'>
-            
-                <div className='six columns'>
+            <div className='row'>  
+                <div  className="col w-50 col-md-auto">
                     <div>
                         <h5>Quien soy</h5>
                         <p>Hola, mi nombre es Germán Mirarchi. Soy un Desarrollador Jr. graduado como Analista de Sistemas en el Instituto de Formación Técnica Superior N° 16 en 2019. 
                             He estado desarrollando proyectos por mi cuenta para aprender nuevos lenguajes y mejorar mis habilidades de programación. 
-                            Me encuentro abierto a nuevos desafíos y dejo mi CV para futuras consultas: <a href={CV}>CV</a>
+                            Me encuentro abierto a nuevos desafíos y dejo mi CV para futuras consultas: <a href={CV} target="_blank" rel="noopener noreferrer">CV</a>
                         </p>
                     </div>
                     <div>
@@ -34,7 +33,7 @@ export default function About() {
                             También soy un coleccionista apasionado de Legos, especialmente de Star Wars, que es una de mis sagas favoritas. Además, trato de ser lo más cinéfilo posible. Otro de mis hobbies es pintar miniaturas de Games Workshop, actualmente en el universo de Warhammer 40k.</p>
                     </div>
                 </div>
-                <div className='six columns'>
+                <div className='col col-md-auto'>
                     <img
                         className="aboutImg"
                         src={imagePath2}
@@ -43,6 +42,6 @@ export default function About() {
                     />
                 </div>
             </div>
-        </>
+        </div>
     )
 }

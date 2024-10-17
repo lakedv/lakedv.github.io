@@ -9,7 +9,7 @@ import Todolist from '../projects/todolist/TodoList'
 
 export default function AppRouter() {
     return (
-        <main className='ten columns'>
+        <main className='vh-100 overflow-y-auto w-100'>
             <Routes>
                 <Route path="/"         element={<Home />} />
                 <Route path="/Projects" element={<Projects />} />
