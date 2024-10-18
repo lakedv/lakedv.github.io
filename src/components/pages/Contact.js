@@ -2,10 +2,7 @@ import React from "react";
 import { useForm, ValidationError } from "@formspree/react";
 
 export default function ContactForm() {
-  const [state, handleSubmit] = useForm("mpwzzbwv");
-  const refresh = () => {
-    window.location.reload();
-  };
+  const [state, handleSubmit, reset] = useForm("mpwzzbwv");
   if (state.succeeded) {
     return (
       <div>
@@ -15,7 +12,7 @@ export default function ContactForm() {
           </div>
         </div>
         <div className="d-flex justify-content-center">
-          <button className="btn btn-primary" onClick={refresh}>
+          <button className="btn btn-primary" onClick={reset}>
             Continuar
           </button>
         </div>
