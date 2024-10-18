@@ -5,8 +5,7 @@ import { faLinkedin } from "@fortawesome/free-brands-svg-icons";
 export default function Footer() {
   const date = new Date().getFullYear();
   return (
-    <footer className="offset-by-two ten columns footer">
-      
+    <footer className="footer col-sm">
       <p>
       Copyright® German Mirarchi-{date}{" "}
       <div>
