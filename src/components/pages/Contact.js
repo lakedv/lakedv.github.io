@@ -3,8 +3,24 @@ import { useForm, ValidationError } from "@formspree/react";
 
 export default function ContactForm() {
   const [state, handleSubmit] = useForm("mpwzzbwv");
+  const refresh = () => {
+    window.location.reload();
+  };
   if (state.succeeded) {
-    return alert("Mensaje enviado con exito");
+    return (
+      <div>
+        <div className="d-flex justify-content-center">
+          <div className="alert alert-success mt-3 w-25 text-center">
+            Mensaje enviado correctamente!
+          </div>
+        </div>
+        <div className="d-flex justify-content-center">
+          <button className="btn btn-primary" onClick={refresh}>
+            Continuar
+          </button>
+        </div>
+      </div>
+    );
   }
   return (
     <div className="container">
@@ -12,9 +28,7 @@ export default function ContactForm() {
       <div className="row mt-3">
         <div className="col-6 offset-3 card shadow">
           <form className="form" onSubmit={handleSubmit}>
-            <div className="row mb-3">
-
-            </div>
+            <div className="row mb-3"></div>
             <div className="row mb-3">
               <div className="col-10 offset-1">
                 <div className="form-floating">
