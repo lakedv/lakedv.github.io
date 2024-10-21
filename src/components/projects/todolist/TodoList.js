@@ -117,7 +117,7 @@ export default function Todolist() {
             To Do:
             <br />
             <input
-              className="todo-input"
+              className="form-control todo-input"
               type="text"
               value={todoList}
               maxLength={maxLength}

@@ -179,3 +179,18 @@ input[type="button"].button-primary:focus {
   background-color: #1EAEDB;
   border-color: #1EAEDB;
 }
+
+/*
+------------------------------Chatbot--------------------------
+*/
+
+.chat-window {
+  width: 750px;
+  margin: auto;
+  border: 1px solid #d5d5d5;
+}
+
+.message-box {
+  width: 100%;
+  padding: 20px 20px;
+}
