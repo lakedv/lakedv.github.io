@@ -13,25 +13,25 @@ export default function NavBar() {
         <li className="nav-item">
           <Link activeClassName="active" className="nav-link" to="/">
             <FontAwesomeIcon icon={faHouseUser} size="3x" />
-            <span className="link-text">Home</span>
+            <span className="link-text">Inicio</span>
           </Link>
         </li>
         <li className="nav-item">
           <Link activeClassName="active" className="nav-link" to="/Projects">
             <FontAwesomeIcon icon={faFolderOpen} size="3x" />
-            <span activeClassName="active" className="link-text">Projects</span>
+            <span activeClassName="active" className="link-text">Proyectos</span>
           </Link>
         </li>
         <li className="nav-item">
           <Link activeClassName="active" className="nav-link" to="/About">
             <FontAwesomeIcon icon={faAddressCard} size="3x" />
-            <span className="link-text">About me</span>
+            <span className="link-text">Sobre Mi</span>
           </Link>
         </li>
         <li className="nav-item">
           <Link activeClassName="active" className="nav-link" to="/Contact">
             <FontAwesomeIcon icon={faEnvelope} size="3x" />
-            <span className="link-text">Contact me</span>
+            <span className="link-text">Contacto</span>
           </Link>
         </li>
       </ul>

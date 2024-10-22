@@ -8,12 +8,12 @@ import { faCss3 } from "@fortawesome/free-brands-svg-icons";
 export default function Projects() {
   return (
     <div className="container">
-      <h1 className="title-h1">Projects</h1>
+      <h1 className="title-h1">Proyectos</h1>
       <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3">
         {/*-new card from here-*/}
         <div className="col-10 col-md-5 col-lg-4 text-center">
           <div className="card">
-            <h3 className="card-header">To do List</h3>
+            <h3 className="card-header">Lista de Tareas</h3>
             <p className="card-text">
               Organizador de tareas por realizar con multiples funciones.
             </p>
