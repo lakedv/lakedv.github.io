@@ -183,3 +183,6 @@ input[type="button"].button-primary:focus {
 /*
 ------------------------------Chatbot--------------------------
 */
+.chatbox {
+  height: 600px;
+}

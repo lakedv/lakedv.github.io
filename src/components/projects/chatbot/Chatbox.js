@@ -1,19 +1,14 @@
 import { useState } from "react";
 
-export default function Chatbox(props) {
-  const [newMessage, setNewMessage] = useState([]);
+export default function ChatBox(props) {
+  const [message, setMessage] = useState("");
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    if (!newMessage.trim()) return;
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    props.setMessages((prev) => [...prev, message]);
 
-    const message = {
-      text: newMessage,
-      user: "human",
-    };
-
-    props.onSubmit(message);
-    setNewMessage("");
+    props.socket.emit("sendMessage", message);
+    setMessage("");
   };
 
   return (
@@ -22,9 +17,9 @@ export default function Chatbox(props) {
         <div className="input-group">
           <input
             aria-label="Mensaje"
-            value={newMessage}
+            value={message}
             placeholder="Mensaje..."
-            onChange={(e) => setNewMessage(e.target.value)}
+            onChange={(e) => setMessage(e.target.value)}
             className="form-control text-input p-2"
             type="text"
             autoFocus

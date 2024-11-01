@@ -1,31 +1,30 @@
-import { useState, useRef, useEffect } from "react";
+import { useEffect, useState } from "react";
+import io from "socket.io-client";
 import Messages from "./Messages";
-import Chatbox from "./Chatbox";
+import ChatBox from "./ChatBox";
+
+const socket = io("http://localhost:3001");
 
 export default function Chat() {
   const [messages, setMessages] = useState([]);
-  const msgEndRef = useRef(null);
-
-  const sendMessage = (newMessage) => {
-    setMessages((messages) => [...messages, newMessage]);
-  };
 
   useEffect(() => {
-    if (msgEndRef.current) {
-      msgEndRef.current.scrollIntoView({ behavior: "smooth" });
-    }
-  }, [messages]);
+    socket.on("receiveMessage", (message) => {
+      setMessages((prev) => [...prev, message]);
+    });
+
+    return () => socket.off("receiveMessage");
+  }, []);
 
   return (
     <div className="container">
       <div className="row mt-3">
         <h1 className="text-center">GerBot</h1>
         <div aria-live="polite" className="flex-grow-1 overflow-auto">
-          <Messages messages={messages}></Messages>
-          <div ref={msgEndRef} />
+        <Messages messages={messages}></Messages>
         </div>
         <div className="">
-          <Chatbox onSubmit={sendMessage}></Chatbox>
+          <ChatBox setMessages={setMessages} socket={socket}></ChatBox>
         </div>
       </div>
     </div>
