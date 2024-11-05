@@ -179,3 +179,10 @@ input[type="button"].button-primary:focus {
   background-color: #1EAEDB;
   border-color: #1EAEDB;
 }
+
+/*
+------------------------------Chatbot--------------------------
+*/
+.chatbox {
+  height: 600px;
+}
