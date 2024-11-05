@@ -3,7 +3,7 @@ import io from "socket.io-client";
 import Messages from "./Messages";
 import ChatBox from "./ChatBox";
 
-const socket = io("http://localhost:3001");
+const socket = io("https://lakebot-api.vercel.app/");
 
 export default function Chat() {
   const [messages, setMessages] = useState([]);
