@@ -7,8 +7,8 @@ import Swal from "sweetalert2";
 export default function Todolist() {
   const swalAlert = Swal.mixin({
     customClass: {
-      confirmButton: "btn btn-success",
-      cancelButton: "btn btn-danger",
+      confirmButton: "btn btn-success mx-3",
+      cancelButton: "btn btn-danger mx-3",
     },
     buttonsStyling: false,
   });
@@ -32,7 +32,7 @@ export default function Todolist() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (todoList.trim() === "") {
-      setError("Input field cannot be empty.");
+      setError("Las tareas deben tener un minimo caracter.");
       return;
     }
 
@@ -68,7 +68,7 @@ export default function Todolist() {
   const todoEdit = (id) => {
     const editTodo = items.find((i) => i.id === id);
     if (editTodo.done) {
-      setError("You can only edit uncompleted Items.");
+      setError("Solo se pueden editar tareas incompletas.");
       return;
     } else {
       setTodo(editTodo.description);
@@ -78,18 +78,39 @@ export default function Todolist() {
   };
 
   const todoDelete = (id) => {
-    setItems((prev) => prev.filter((item) => item.id !== id));
+    swalAlert
+    .fire({
+      title: "Estas seguro?",
+      text: "Se eliminara la tarea",
+      showCancelButton: true, 
+      confirmButtonText: "Continuar",
+      cancelButtonText: "Cancelar",
+      reverseButtons: false,
+    })
+    .then((result) => {
+      if(result.isConfirmed){
+        setItems((prev) => prev.filter((item) => item.id !== id));
+        swalAlert.fire({
+          title: "Tarea eliminada.",
+        })
+      } else {
+        swalAlert.fire({
+          title: "Operacion cancelada."
+        })
+      }
+    })
+    
   };
 
   const deleteAll = () => {
     swalAlert
       .fire({
-        title: "Are you sure?",
-        text: "You will delete all the cache.",
+        title: "Estas seguro?",
+        text: "Se eliminaran todas las tareas guardadas",
         icon: "warning",
         showCancelButton: true,
-        confirmButtonText: "Proceed",
-        cancelButtonText: "Cancel",
+        confirmButtonText: "Continuar",
+        cancelButtonText: "Cancelar",
         reverseButtons: true,
       })
       .then((result) => {
@@ -98,12 +119,12 @@ export default function Todolist() {
           setItems([]);
           setNextId(1);
           swalAlert.fire({
-            title: "Cache deleted.",
+            title: "Tareas eliminadas.",
             icon: "success",
           });
         } else {
           swalAlert.fire({
-            title: "Operation aborted.",
+            title: "Operacion cancelada",
           });
         }
       });
@@ -112,72 +133,75 @@ export default function Todolist() {
   return (
     <div className="container">
       <div className="row mt-3">
-        <form className="todo-container" onSubmit={handleSubmit}>
-          <label>
-            To Do:
-            <br />
-            <input
-              className="form-control todo-input"
-              type="text"
-              value={todoList}
-              maxLength={maxLength}
-              onChange={(e) => setTodo(e.target.value)}
-            />
-            <button className="btn btn-primary mx-1" type="submit">
-              {editItemId !== null ? "Update" : "Add"}
+        <div className="col-6 offset-3">
+          <form className="form todo-container" onSubmit={handleSubmit}>
+            <label>
+              Tareas:
+              <br />
+              <input
+                className="form-control todo-input"
+                type="text"
+                value={todoList}
+                maxLength={maxLength}
+                onChange={(e) => setTodo(e.target.value)}
+              />
+              <button className="btn btn-primary mx-1" type="submit">
+                {editItemId !== null ? "Editar" : "Nuevo"}
+              </button>
+              {editItemId !== null && <button className="btn btn-danger">Cancelar</button>}         
+              {error && <p style={{ color: "red" }}>{error}</p>}
+            </label>
+            <button className="btn btn-danger mx-1" onClick={deleteAll}>
+              Borrar todo
             </button>
-            {error && <p style={{ color: "red" }}>{error}</p>}
-          </label>
-          <button className="btn btn-danger mx-1" onClick={deleteAll}>
-            Delete All
-          </button>
-          <br />
-          {todoList.length}/{maxLength}
-        </form>
-        <div className="container">
-          <div className="row">
-            <div className="col-lg-8 col-6">
-              <h5>Tareas</h5>
+            <br />
+            {todoList.length}/{maxLength}
+          </form>
+            <div className="row">
+              <div className="col-lg-8 col-6">
+                <h5>Tareas</h5>
+              </div>
+              <div className="col-lg-4 col-2 text-end">
+                <h5>Acciones</h5>
+              </div>
+            <div className="container">
+              <div className="row my-1">
+                <ul className="todo-list">
+                  {items.map((toDo) => (
+                    <li className="row" key={toDo.id}>
+                      <div className="col-lg-8 col-6">
+                        <input
+                          type="checkbox"
+                          onChange={() => setAchieved(toDo.id)}
+                          checked={toDo.done}
+                        />
+                        {toDo.done ? (
+                          <del className="todo-done">{toDo.description}</del>
+                        ) : (
+                          toDo.description
+                        )}
+                      </div>
+                      <div className="col-lg-4 col-2 ">
+                        <div className="d-flex justify-content-end">
+                          <button
+                            className="btn btn-warning mx-1 mt-1"
+                            onClick={() => todoEdit(toDo.id)}
+                          >
+                            <FontAwesomeIcon icon={faPen} />
+                          </button>
+                          <button
+                            className="btn btn-danger mx-1 mt-1"
+                            onClick={() => todoDelete(toDo.id)}
+                          >
+                            <FontAwesomeIcon icon={faXmark} />
+                          </button>
+                        </div>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
-            <div className="col-lg-4 col-2">
-              <h5>Acciones</h5>
-            </div>
-          </div>
-          <div className="row my-1">
-            <ul className="todo-list">
-              {items.map((toDo) => (
-                <li className="row" key={toDo.id}>
-                  <div className="col-lg-8 col-6">
-                    <input
-                      type="checkbox"
-                      onChange={() => setAchieved(toDo.id)}
-                      checked={toDo.done}
-                    />
-                    {toDo.done ? (
-                      <del className="todo-done">{toDo.description}</del>
-                    ) : (
-                      toDo.description
-                    )}
-                  </div>
-                  <div className="col-lg-4 col-2">
-                    <div className="d-flex">
-                    <button
-                      className="btn btn-warning mx-1 mt-1"
-                      onClick={() => todoEdit(toDo.id)}
-                    >
-                      <FontAwesomeIcon icon={faPen} />
-                    </button>
-                    <button
-                      className="btn btn-danger mx-1 mt-1"
-                      onClick={() => todoDelete(toDo.id)}
-                    >
-                      <FontAwesomeIcon icon={faXmark} />
-                    </button>
-                    </div>
-                  </div>
-                </li>
-              ))}
-            </ul>
           </div>
         </div>
       </div>
