@@ -24,7 +24,7 @@ export default function Chat() {
       icon: "warning",
       confirmButtonText: 'Aceptar'
     })
-  })
+  }, [])
 
   return (
     <div className="container">
