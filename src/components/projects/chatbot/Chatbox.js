@@ -13,7 +13,7 @@ export default function ChatBox(props) {
 
   return (
     <div className="">
-      <form className="col-10" onSubmit={handleSubmit}>
+      <form className="offset-2 col-8" onSubmit={handleSubmit}>
         <div className="input-group">
           <input
             aria-label="Mensaje"

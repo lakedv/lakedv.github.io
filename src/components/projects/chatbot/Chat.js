@@ -20,7 +20,7 @@ export default function Chat() {
     <div className="container">
       <div className="row mt-3">
         <h1 className="text-center">GerBot</h1>
-        <div aria-live="polite" className="flex-grow-1 overflow-auto">
+        <div aria-live="polite" className="flex-grow-1">
         <Messages messages={messages}></Messages>
         </div>
         <div className="">
