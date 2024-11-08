@@ -1,18 +1,18 @@
 {
   "files": {
     "main.css": "/static/css/main.62d80472.css",
-    "main.js": "/static/js/main.a1e3186e.js",
+    "main.js": "/static/js/main.06e56586.js",
     "static/js/453.1407b060.chunk.js": "/static/js/453.1407b060.chunk.js",
     "static/media/MGermanCVESP.pdf": "/static/media/MGermanCVESP.7f362c971aef51abfab8.pdf",
     "static/media/aboutphoto.jpeg": "/static/media/aboutphoto.dca85f40c6a26f3402a1.jpeg",
     "static/media/toDoList.png": "/static/media/toDoList.16ce347cf9d9b9dbeb5b.png",
     "index.html": "/index.html",
     "main.62d80472.css.map": "/static/css/main.62d80472.css.map",
-    "main.a1e3186e.js.map": "/static/js/main.a1e3186e.js.map",
+    "main.06e56586.js.map": "/static/js/main.06e56586.js.map",
     "453.1407b060.chunk.js.map": "/static/js/453.1407b060.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.62d80472.css",
-    "static/js/main.a1e3186e.js"
+    "static/js/main.06e56586.js"
   ]
 }
