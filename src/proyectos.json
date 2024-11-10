@@ -21,7 +21,7 @@
       {"name": "React JS",    "icon": "faReact"},
       {"name": "Node JS",     "icon": "faNode"},
       {"name": "DialogFlow",  "icon": null},
-      {"name": "Vercel",      "icon": null}
+      {"name": "Pusher",      "icon": null}
     ],
     "path": "/Chatbot"
   }
