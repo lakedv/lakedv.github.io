@@ -1,16 +1,36 @@
 import { useState } from "react";
 
-export default function ChatBox(props) {
+export default function ChatBox({setMessages}) {
   const [message, setMessage] = useState("");
+  let apiUrl = '';
+  const env = process.env.NODE_ENV
 
-  const handleSubmit = (e) => {
+  if(env === "development"){
+    apiUrl = "http://localhost:3001"
+    console.log("Servidor alojado en localhost:3001")
+  } else {
+    apiUrl = "https://lakebot-api.vercel.app/"
+    console.log("Servidor alojado en app-vercel")
+  }
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    props.setMessages((prev) => [...prev, message]);
+    setMessages((prev) => [...prev, message]);
 
-    props.socket.emit("sendMessage", message);
+    try {
+    await fetch(`${apiUrl}/Chatbot`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({message}),
+    }) 
     setMessage("");
+  } catch(error){
+    console.error("Error al enviar mensaje:", error);
+    alert("Hubo un problema con la conexion al servidor")
   };
-
+}
   return (
     <div className="">
       <form className="offset-2 col-8" onSubmit={handleSubmit}>
