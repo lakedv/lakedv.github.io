@@ -9,7 +9,7 @@ export default function ChatBox({setMessages}) {
     apiUrl = "http://localhost:3001"
     console.log("Servidor alojado en localhost:3001")
   } else {
-    apiUrl = "https://lakebot-api.vercel.app/"
+    apiUrl = "https://lakebot-api.vercel.app"
     console.log("Servidor alojado en app-vercel")
   }
 
